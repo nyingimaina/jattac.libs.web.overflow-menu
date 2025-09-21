@@ -1,0 +1,130 @@
+/*
+ * Overflow Menu Theme Details
+ *
+ * This section outlines the default styling values used in the OverflowMenu component.
+ * These values were originally defined as CSS variables for theming flexibility.
+ * For direct modification, update the values below.
+ *
+ * Colors:
+ *   - Text Color: #024b59
+ *   - Text Hover Color: #016a80
+ *   - Background: rgba(255, 255, 255, 0.75) (Light frosted glass effect)
+ *   - Item Hover Background: rgba(2, 75, 89, 0.05)
+ *   - Item Active Background: rgba(2, 75, 89, 0.1)
+ *   - Border Color: rgba(2, 75, 89, 0.15)
+ *
+ * Sizing & Shape:
+ *   - Background Blur: 12px
+ *   - Border Radius: 12px (for the menu container)
+ *   - Item Border Radius: 8px (for individual menu items)
+ *
+ * Effects:
+ *   - Shadow: 0 8px 24px rgba(0, 0, 0, 0.12)
+ */
+
+.menuWrapper {
+  /* CSS Variables were here, now using direct values */
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.trigger {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem; /* Increased font size */
+  cursor: pointer;
+  color: #024b59; /* --ofm-text-color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem; /* Increased width */
+  height: 3rem; /* Increased height */
+  border-radius: 50%;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.trigger:hover,
+.trigger:focus {
+  color: #016a80; /* --ofm-text-hover-color */
+  background-color: rgba(2, 75, 89, 0.05); /* --ofm-item-hover-bg */
+  outline: none;
+}
+
+/* Light frosted glass menu */
+.menu {
+  background: rgba(255, 255, 255, 0.75); /* --ofm-bg */
+  backdrop-filter: blur(12px); /* --ofm-bg-blur */
+  -webkit-backdrop-filter: blur(12px); /* --ofm-bg-blur */
+  border-radius: 12px; /* --ofm-border-radius */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* --ofm-shadow */
+  padding: 0.5rem 0.25rem;
+  min-width: 180px;
+  width: max-content; /* Constrain width to content */
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border: 1px solid #016a80; /* Using --ofm-text-hover-color for a more distinct border */
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  z-index: 9999;
+  color: #024b59; /* --ofm-text-color */
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Menu buttons */
+.menu button {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px; /* --ofm-item-border-radius */
+  text-align: left;
+  color: #024b59; /* --ofm-text-color */
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.12s ease;
+  user-select: none;
+  border-bottom: 1px solid rgba(2, 75, 89, 0.1); /* Muted border separating items */
+}
+
+.menu button:last-child {
+  border-bottom: none; /* Remove border from the last item */
+}
+
+/* Hover highlight with subtle teal shade */
+.menu button:hover,
+.menu button:focus {
+  background: rgba(2, 75, 89, 0.05); /* --ofm-item-hover-bg */
+  outline: none;
+  transform: scale(1.03);
+}
+
+/* Optional: subtle active click effect */
+.menu button:active {
+  transform: scale(0.98);
+  background: rgba(2, 75, 89, 0.1); /* --ofm-item-active-bg */
+}
+
+/* New styles for the default animated icon */
+.dotsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex-direction: column;
+}
+
+.dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
