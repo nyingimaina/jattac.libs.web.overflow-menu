@@ -1,6 +1,6 @@
 {
   "name": "jattac.libs.web.overflow-menu",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A customizable and lightweight React overflow menu component with a modern design.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

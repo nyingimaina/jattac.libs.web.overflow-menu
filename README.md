@@ -8,10 +8,12 @@ This component provides a clean, modern, and accessible overflow menu suitable f
 
 ## Features
 
-- **Smooth Animations**: Built with Framer Motion for fluid, physics-based animations.
+- **Smooth Animations**: Built with Framer Motion for fluid, physics-based animations, including a subtle wave animation and color change for the default icon.
 - **Staggered Item Display**: Menu items animate in with a subtle "waterfall" effect.
 - **Highly Customizable**: Easily change the trigger icon, menu item content, and functionality.
-- **Themable**: Uses CSS variables to allow for deep customization that can match any corporate branding.
+- **Responsive Positioning**: Mobile-first design with desktop awareness, ensuring the menu positions correctly on various screen sizes and avoids cut-offs.
+- **Enhanced Hover Effects**: Menu items feature modern background and foreground color changes on hover for clear visual feedback.
+- **Item Separators**: Muted borders visually separate menu items, improving clarity and user experience.
 - **Portal Support**: Optionally render the menu in a React Portal to avoid CSS stacking context issues.
 - **Lightweight**: Simple and focused on providing a great overflow menu experience without unnecessary bloat.
 
@@ -24,8 +26,6 @@ npm install jattac.libs.web.overflow-menu react react-dom framer-motion
 ```
 
 ## Getting Started
-
-
 
 Here's a basic example to get you up and running quickly.
 
@@ -128,52 +128,19 @@ const richMenuItems: IOverflowMenuItem[] = [
 
 ---
 
-## Theming and Customization
+## Styling and Customization
 
-The component can be easily themed by overriding the default CSS variables. The variables are scoped to the `.menuWrapper` class, which is the root of the component.
+The component's styling is primarily controlled via its internal CSS module (`OverflowMenu.module.css`). While direct customization through CSS variables is no longer supported, you can override the component's default styles by targeting its CSS classes in your own stylesheets.
 
-Here are the available variables and their default values:
+For example, to change the background of the menu:
 
 ```css
-.your-custom-wrapper-class {
-  --ofm-text-color: #024b59;
-  --ofm-text-hover-color: #016a80;
-  --ofm-bg: rgba(255, 255, 255, 0.75);
-  --ofm-bg-blur: 12px;
-  --ofm-border-radius: 12px;
-  --ofm-item-border-radius: 8px;
-  --ofm-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --ofm-border: 1px solid rgba(2, 75, 89, 0.15);
-  --ofm-item-hover-bg: rgba(2, 75, 89, 0.05);
-  --ofm-item-active-bg: rgba(2, 75, 89, 0.1);
+/* In your application's CSS file */
+.your-custom-wrapper-class .OverflowMenu-module_menu__n8uKD { /* Use the hashed class name from your build output */
+  background: #f0f0f0; /* Your desired background */
 }
 ```
-
-**Example: Creating a Dark Theme**
-
-To apply a dark theme, create a CSS class that overrides these variables and apply it to a parent element.
-
-*Your CSS file:*
-```css
-.dark-theme {
-  --ofm-text-color: #e0e0e0;
-  --ofm-text-hover-color: #ffffff;
-  --ofm-bg: rgba(40, 40, 40, 0.8);
-  --ofm-border: 1px solid rgba(255, 255, 255, 0.1);
-  --ofm-item-hover-bg: rgba(255, 255, 255, 0.1);
-  --ofm-item-active-bg: rgba(255, 255, 255, 0.15);
-}
-```
-
-*Your JSX file:*
-```jsx
-import './your-styles.css';
-
-// ...
-<div className="dark-theme">
-  <OverflowMenu items={menuItems} />
-</div>
-```
+*Note: The exact hashed class names (e.g., `OverflowMenu-module_menu__n8uKD`) will depend on your build process. You may need to inspect the rendered HTML to find them.*
 
 ## License
 
