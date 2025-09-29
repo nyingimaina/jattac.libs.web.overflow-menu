@@ -67,10 +67,6 @@
   flex-direction: column;
   gap: 0.35rem;
   border: 1px solid #016a80; /* Using --ofm-text-hover-color for a more distinct border */
-  position: absolute;
-  right: 0;
-  top: 100%;
-  margin-top: 0.5rem;
   z-index: 9999;
   color: #024b59; /* --ofm-text-color */
   font-weight: 500;
