@@ -1,8 +1,52 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { IOverflowMenuItem } from '../Data/IOverflowMenuItem';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import styles from '../Styles/OverflowMenu.module.css';
 import { createPortal } from 'react-dom';
+
+// A more dynamic and engaging animated icon to replace the static '⋮'
+const DefaultIcon = () => {
+    const dotVariants: Variants = {
+        initial: { y: 0, scale: 1 },
+        hover: {
+            y: -4,
+            scale: 1.2,
+            transition: {
+                type: 'spring',
+                stiffness: 500,
+                damping: 20,
+            },
+        },
+        rest: {
+            y: 0,
+            scale: 1,
+            transition: {
+                type: 'spring',
+                stiffness: 500,
+                damping: 20,
+            },
+        },
+    };
+
+    return (
+        <motion.div
+            className={styles.dotsWrapper}
+            initial="rest"
+            whileHover="hover"
+            animate="rest"
+        >
+            {[0, 1, 2].map((i) => (
+                <motion.span
+                    key={i}
+                    className={styles.dot}
+                    variants={dotVariants}
+                    custom={i}
+                    transition={{ delay: i * 0.05 }}
+                />
+            ))}
+        </motion.div>
+    );
+};
 
 interface OverflowMenuProps {
     items: IOverflowMenuItem[];
@@ -13,7 +57,7 @@ interface OverflowMenuProps {
 
 const OverflowMenu: React.FC<OverflowMenuProps> = ({
     items,
-    icon = '⋮',
+    icon,
     className = '',
     portal = null,
 }) => {
@@ -98,17 +142,6 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
     const itemVariants = {
         hidden: { opacity: 0, y: -10 },
         visible: { opacity: 1, y: 0 },
-        hover: { // New hover variant for menu items
-            backgroundColor: 'rgba(2, 75, 89, 0.05)', // Matching CSS
-            scale: 1.03, // Matching CSS
-        }
-    };
-
-    const triggerHoverVariants = { // New hover variant for trigger button
-        hover: {
-            color: '#016a80', // Matching CSS
-            backgroundColor: 'rgba(2, 75, 89, 0.05)', // Matching CSS
-        }
     };
 
     const menuContent = (
@@ -136,7 +169,17 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
                                 setIsOpen(false);
                             }}
                             variants={itemVariants}
-                            whileHover="hover" // Apply hover variant
+                            whileHover={{
+                                scale: 1.05,
+                                y: -2,
+                                color: '#016a80',
+                                backgroundColor: 'rgba(2, 75, 89, 0.05)',
+                                transition: {
+                                    type: 'spring',
+                                    stiffness: 400,
+                                    damping: 15,
+                                },
+                            }}
                         >
                             {item.content}
                         </motion.button>
@@ -148,16 +191,25 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
 
     return (
         <div className={styles.overflowMenu}>
-            <motion.button // Changed to motion.button
+            <motion.button
                 ref={triggerRef}
                 onClick={toggleMenu}
                 className={`${styles.trigger} ${className}`}
                 aria-haspopup="true"
                 aria-expanded={isOpen}
-                whileHover="hover" // Apply hover variant
-                variants={triggerHoverVariants} // Apply trigger hover variants
+                whileHover={{
+                    scale: 1.1,
+                    y: -2,
+                    color: '#016a80',
+                    backgroundColor: 'rgba(2, 75, 89, 0.05)',
+                    transition: {
+                        type: 'spring',
+                        stiffness: 400,
+                        damping: 15,
+                    },
+                }}
             >
-                {icon}
+                {icon || <DefaultIcon />}
             </motion.button>
             {portal ? createPortal(menuContent, portal) : menuContent}
         </div>
