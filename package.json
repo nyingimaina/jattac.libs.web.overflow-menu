@@ -1,6 +1,6 @@
 {
   "name": "jattac.libs.web.overflow-menu",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "A customizable and lightweight React overflow menu component with a modern design.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -69,6 +69,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-popover": "^1.0.7",
     "tslib": "^2.6.2"
   }
 }
