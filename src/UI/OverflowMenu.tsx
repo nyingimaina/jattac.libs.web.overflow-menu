@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import styles from '../Styles/OverflowMenu.module.css';
-import { createPortal } from 'react-dom';
 
-// A more dynamic and engaging animated icon to replace the static '⋮'
 const DefaultIcon = () => {
     const dotVariants: Variants = {
         initial: { y: 0, scale: 1 },
@@ -61,72 +60,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
     className = '',
     portal = null,
 }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isInitialRender, setIsInitialRender] = useState(true);
-    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
-    const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
-    const menuRef = useRef<HTMLDivElement>(null);
-    const triggerRef = useRef<HTMLButtonElement>(null);
-
-    useEffect(() => {
-        setIsInitialRender(false);
-    }, []);
-
-    const toggleMenu = (event: React.MouseEvent) => {
-        event.stopPropagation();
-        setClickPosition({ x: event.clientX, y: event.clientY });
-        setIsOpen(!isOpen);
-    };
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (triggerRef.current && triggerRef.current.contains(event.target as Node)) {
-            return;
-        }
-        if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-            setIsOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen]);
-
-    useLayoutEffect(() => {
-        if (isOpen && menuRef.current) {
-            const menuRect = menuRef.current.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            let top = clickPosition.y;
-            let left = clickPosition.x;
-
-            if (left + menuRect.width > viewportWidth) {
-                left = viewportWidth - menuRect.width - 10;
-            }
-
-            if (top + menuRect.height > viewportHeight) {
-                top = viewportHeight - menuRect.height - 10;
-            }
-            
-            if (left < 0) {
-                left = 10;
-            }
-
-            if (top < 0) {
-                top = 10;
-            }
-
-            setMenuPosition({ top, left });
-        }
-    }, [isOpen, clickPosition]);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     const menuVariants = {
         hidden: {
@@ -151,75 +85,66 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
         visible: { opacity: 1, y: 0 },
     };
 
-    const menuContent = (
+    const content = (
         <AnimatePresence>
             {isOpen && (
-                <motion.div
-                    ref={menuRef}
-                    className={styles.menu}
-                    style={{
-                        position: 'fixed',
-                        top: `${menuPosition.top}px`,
-                        left: `${menuPosition.left}px`,
-                    }}
-                    variants={menuVariants}
-                    initial={isInitialRender ? false : "hidden"}
-                    animate="visible"
-                    exit="hidden"
-                >
-                    {items.map((item, index) => (
-                        <motion.button
-                            key={index}
-                            className={styles.menuItem}
-                            onClick={() => {
-                                item.onClick?.();
-                                setIsOpen(false);
-                            }}
-                            variants={itemVariants}
-                            whileHover={{
-                                scale: 1.05,
-                                y: -2,
-                                color: '#016a80',
-                                backgroundColor: 'rgba(2, 75, 89, 0.05)',
-                                transition: {
-                                    type: 'spring',
-                                    stiffness: 400,
-                                    damping: 15,
-                                },
-                            }}
+                <DropdownMenu.Portal container={portal} forceMount>
+                    <DropdownMenu.Content
+                        asChild
+                        className={styles.menu}
+                        sideOffset={5}
+                        align="end"
+                    >
+                        <motion.div
+                            variants={menuVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
                         >
-                            {item.content}
-                        </motion.button>
-                    ))}
-                </motion.div>
+                            {items.map((item, index) => (
+                                <DropdownMenu.Item
+                                    key={index}
+                                    asChild
+                                    className={styles.menuItem}
+                                    onSelect={() => {
+                                        item.onClick?.();
+                                    }}
+                                >
+                                    <motion.button variants={itemVariants}>
+                                        {item.content}
+                                    </motion.button>
+                                </DropdownMenu.Item>
+                            ))}
+                        </motion.div>
+                    </DropdownMenu.Content>
+                </DropdownMenu.Portal>
             )}
         </AnimatePresence>
     );
 
     return (
-        <div className={styles.overflowMenu}>
-            <motion.button
-                ref={triggerRef}
-                onClick={toggleMenu}
-                className={`${styles.trigger} ${className}`}
-                aria-haspopup="true"
-                aria-expanded={isOpen}
-                whileHover={{
-                    scale: 1.1,
-                    y: -2,
-                    color: '#016a80',
-                    backgroundColor: 'rgba(2, 75, 89, 0.05)',
-                    transition: {
-                        type: 'spring',
-                        stiffness: 400,
-                        damping: 15,
-                    },
-                }}
-            >
-                {icon || <DefaultIcon />}
-            </motion.button>
-            {portal ? createPortal(menuContent, portal) : menuContent}
-        </div>
+        <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenu.Trigger asChild className={`${styles.trigger} ${className}`}>
+                <motion.button
+                    aria-haspopup="true"
+                    aria-expanded={isOpen}
+                    whileHover={{
+                        scale: 1.1,
+                        y: -2,
+                        color: '#016a80',
+                        backgroundColor: 'rgba(2, 75, 89, 0.05)',
+                        transition: {
+                            type: 'spring',
+                            stiffness: 400,
+                            damping: 15,
+                        },
+                    }}
+                >
+                    {icon || <DefaultIcon />}
+                </motion.button>
+            </DropdownMenu.Trigger>
+            {content}
+        </DropdownMenu.Root>
     );
 };
 
