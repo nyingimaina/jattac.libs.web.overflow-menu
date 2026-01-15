@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import styles from '../Styles/OverflowMenu.module.css';
@@ -64,6 +64,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
     const [isOpen, setIsOpen] = useState(false);
     const [isInitialRender, setIsInitialRender] = useState(true);
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+    const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
     const menuRef = useRef<HTMLDivElement>(null);
     const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -73,6 +74,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
 
     const toggleMenu = (event: React.MouseEvent) => {
         event.stopPropagation();
+        setClickPosition({ x: event.clientX, y: event.clientY });
         setIsOpen(!isOpen);
     };
 
@@ -97,29 +99,34 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
         };
     }, [isOpen]);
 
-    useEffect(() => {
-        if (isOpen && triggerRef.current && menuRef.current) {
-            const triggerRect = triggerRef.current.getBoundingClientRect();
+    useLayoutEffect(() => {
+        if (isOpen && menuRef.current) {
             const menuRect = menuRef.current.getBoundingClientRect();
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
 
-            let top = triggerRect.bottom;
-            let left = triggerRect.left;
+            let top = clickPosition.y;
+            let left = clickPosition.x;
 
             if (left + menuRect.width > viewportWidth) {
                 left = viewportWidth - menuRect.width - 10;
-                if (left < 0) left = 10;
             }
 
             if (top + menuRect.height > viewportHeight) {
-                top = triggerRect.top - menuRect.height - 10;
-                if (top < 0) top = 10;
+                top = viewportHeight - menuRect.height - 10;
+            }
+            
+            if (left < 0) {
+                left = 10;
+            }
+
+            if (top < 0) {
+                top = 10;
             }
 
             setMenuPosition({ top, left });
         }
-    }, [isOpen, menuRef.current]);
+    }, [isOpen, clickPosition]);
 
     const menuVariants = {
         hidden: {
