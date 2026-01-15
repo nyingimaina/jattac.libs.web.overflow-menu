@@ -1,37 +1,58 @@
-# React Overflow Menu
+# Jattac Overflow Menu
 
 [![npm version](https://badge.fury.io/js/jattac.libs.web.overflow-menu.svg)](https://badge.fury.io/js/jattac.libs.web.overflow-menu)
 
-A customizable, animated, and lightweight React overflow menu component built with TypeScript and Framer Motion.
+A customizable, accessible, and animated overflow menu for React, designed for a delightful developer experience.
 
-This component provides a clean, modern, and accessible overflow menu suitable for any React application, with a focus on great user experience through satisfying micro-interactions.
+This component provides a powerful and flexible overflow menu that is easy to style and customize. It's built on top of [Radix UI's](https://www.radix-ui.com/) Dropdown Menu primitive and animated with [Framer Motion](https://www.framer.com/motion/), giving you a robust foundation with a beautiful user experience out of the box.
 
-## Features
+---
 
-- **Smooth Animations**: Built with Framer Motion for fluid, physics-based animations, including a subtle wave animation and color change for the default icon.
-- **Staggered Item Display**: Menu items animate in with a subtle "waterfall" effect.
-- **Highly Customizable**: Easily change the trigger icon, menu item content, and functionality.
-- **Responsive Positioning**: Mobile-first design with desktop awareness, ensuring the menu positions correctly on various screen sizes and avoids cut-offs.
-- **Enhanced Hover Effects**: Menu items feature modern background and foreground color changes on hover for clear visual feedback.
-- **Item Separators**: Muted borders visually separate menu items, improving clarity and user experience.
-- **Portal Support**: Optionally render the menu in a React Portal to avoid CSS stacking context issues.
-- **Lightweight**: Simple and focused on providing a great overflow menu experience without unnecessary bloat.
+## Table of Contents
+
+- [Why Jattac Overflow Menu?](#why-jattac-overflow-menu)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [API and Props](#api-and-props)
+  - [`OverflowMenu` Component](#overflowmenu-component)
+  - [`IOverflowMenuItem` Interface](#ioverflowmenuitem-interface)
+- [Recipes: From Zero to Expert](#recipes-from-zero-to-expert)
+  - [Custom Trigger Icon](#custom-trigger-icon)
+  - [Rich Item Content](#rich-item-content)
+  - [Using a Portal](#using-a-portal)
+- [Styling and Customization](#styling-and-customization)
+- [Accessibility](#accessibility)
+- [License](#license)
+
+---
+
+## Why Jattac Overflow Menu?
+
+This component is designed to be the last overflow menu you'll ever need. Here's the philosophy:
+
+- **Headless at the Core:** We leverage the power of Radix UI to handle all the complex logic for state management, positioning, and accessibility. This means you get a battle-tested foundation that just works.
+- **You Own the UI:** While we provide a default modern look and feel, you have 100% control over the rendering. Use our styles, or override them completely. It's your choice.
+- **Animations Included:** We use Framer Motion to provide smooth, delightful animations out of the box.
+- **Developer Experience First:** Our goal is to provide a component that is easy to learn, a joy to use, and powerful enough for advanced use cases.
 
 ## Installation
 
 Install the package and its peer dependencies using npm:
 
 ```bash
-npm install jattac.libs.web.overflow-menu react react-dom framer-motion
+npm install jattac.libs.web.overflow-menu react react-dom framer-motion @radix-ui/react-dropdown-menu
 ```
+
+> **Note on Peer Dependencies:** This component requires `react`, `react-dom`, `framer-motion`, and `@radix-ui/react-dropdown-menu` to be installed in your project.
 
 ## Getting Started
 
-Here's a basic example to get you up and running quickly.
+Here's a basic example to get you up and running in seconds.
 
 ```jsx
 import React from 'react';
 import OverflowMenu, { IOverflowMenuItem } from 'jattac.libs.web.overflow-menu';
+import 'jattac.libs.web.overflow-menu/dist/index.css'; // Don't forget to import the styles!
 
 const App = () => {
   const menuItems: IOverflowMenuItem[] = [
@@ -50,7 +71,7 @@ const App = () => {
   ];
 
   return (
-    <div style={{ position: 'relative', display: 'flex', justifyContent: 'flex-end', padding: '2rem' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '2rem' }}>
       <OverflowMenu items={menuItems} />
     </div>
   );
@@ -61,16 +82,18 @@ export default App;
 
 ## API and Props
 
+### `OverflowMenu` Component
+
 The `OverflowMenu` component accepts the following props:
 
-| Prop        | Type                  | Required | Default | Description                                                                                                |
-|-------------|-----------------------|----------|---------|------------------------------------------------------------------------------------------------------------|
-| `items`     | `IOverflowMenuItem[]` | Yes      | -       | An array of objects that define the menu items.                                                            |
-| `icon`      | `ReactNode`           | No       | `'⋮'`     | A custom trigger icon to open the menu.                                                                    |
-| `className` | `string`              | No       | `''`      | A CSS class to apply to the trigger button for custom styling.                                             |
-| `portal`    | `HTMLElement`         | No       | `null`  | A DOM element to render the menu into. Use this to prevent z-index issues with parent containers.        |
+| Prop        | Type                  | Required | Default     | Description                                                                                                |
+|-------------|-----------------------|----------|-------------|------------------------------------------------------------------------------------------------------------|
+| `items`     | `IOverflowMenuItem[]` | Yes      | -           | An array of objects that define the menu items.                                                            |
+| `icon`      | `ReactNode`           | No       | `DefaultIcon` | A custom trigger icon to open the menu.                                                                    |
+| `className` | `string`              | No       | `''`        | A CSS class to apply to the trigger button for custom styling.                                             |
+| `portal`    | `HTMLElement`         | No       | `null`      | A DOM element to render the menu into. Use this to prevent z-index issues with parent containers.        |
 
-### The `IOverflowMenuItem` Interface
+### `IOverflowMenuItem` Interface
 
 Each item in the `items` array must conform to this interface:
 
@@ -83,7 +106,9 @@ interface IOverflowMenuItem {
 
 ---
 
-## Advanced Usage
+## Recipes: From Zero to Expert
+
+Here are some common use cases to help you get the most out of the component.
 
 ### Custom Trigger Icon
 
@@ -91,12 +116,11 @@ You can provide any `ReactNode` as the trigger icon. This is great for using a c
 
 ```jsx
 import { BsThreeDotsVertical } from 'react-icons/bs';
-
 // ...
 <OverflowMenu items={menuItems} icon={<BsThreeDotsVertical size={24} />} />
 ```
 
-### Complex Item Content
+### Rich Item Content
 
 The `content` property of a menu item can be any valid `ReactNode`. This allows you to create rich menu items with icons, styled text, and more.
 
@@ -126,21 +150,59 @@ const richMenuItems: IOverflowMenuItem[] = [
 <OverflowMenu items={richMenuItems} />
 ```
 
+### Using a Portal
+
+To avoid z-index issues with parent containers, you can render the menu in a React Portal.
+
+```jsx
+const App = () => {
+  const portalContainer = document.getElementById('portal-container');
+  // ...
+  return (
+    <div>
+      <OverflowMenu items={menuItems} portal={portalContainer} />
+      {/* ... other content ... */}
+      <div id="portal-container" />
+    </div>
+  );
+}
+```
+
+> **Best Practice:** Using a portal is highly recommended for menus that might be rendered inside complex layouts, such as tables, modals, or other components with their own stacking context.
+
 ---
 
 ## Styling and Customization
 
-The component's styling is primarily controlled via its internal CSS module (`OverflowMenu.module.css`). While direct customization through CSS variables is no longer supported, you can override the component's default styles by targeting its CSS classes in your own stylesheets.
+The component is styled using CSS Modules, but it's designed to be easily customized. The underlying Radix UI components expose `data-` attributes that you can use to target specific states and parts of the menu.
 
-For example, to change the background of the menu:
+Here are some of the most common selectors:
+
+| Selector                               | Description                               |
+|----------------------------------------|-------------------------------------------|
+| `[data-state="open"]`                  | Applied to the trigger when the menu is open. |
+| `[data-state="closed"]`                | Applied to the trigger when the menu is closed. |
+| `.jattac-overflow-menu-content`        | The menu content container.               |
+| `.jattac-overflow-menu-item`           | An individual menu item.                  |
+| `[data-highlighted]`                   | Applied to a menu item when it is highlighted (e.g., on hover or with keyboard navigation). |
+
+**Example: Overriding the background color of a highlighted item**
 
 ```css
-/* In your application's CSS file */
-.your-custom-wrapper-class .OverflowMenu-module_menu__n8uKD { /* Use the hashed class name from your build output */
-  background: #f0f0f0; /* Your desired background */
+/* In your application's global CSS file */
+.jattac-overflow-menu-item[data-highlighted] {
+  background-color: #f0f0f0;
+  color: #333;
 }
 ```
-*Note: The exact hashed class names (e.g., `OverflowMenu-module_menu__n8uKD`) will depend on your build process. You may need to inspect the rendered HTML to find them.*
+
+## Accessibility
+
+This component is built on top of Radix UI's Dropdown Menu, which is fully accessible and follows the [WAI-ARIA Menu Button design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubutton/).
+
+- **Keyboard Navigation:** Full keyboard support for opening, closing, and navigating the menu.
+- **Focus Management:** Focus is automatically managed, moving to the menu when it opens and returning to the trigger when it closes.
+- **ARIA Attributes:** All necessary ARIA attributes are automatically applied.
 
 ## License
 
