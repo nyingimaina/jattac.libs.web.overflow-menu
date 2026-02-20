@@ -1,9 +1,21 @@
 import { ReactNode } from 'react';
 
-export default interface IOverflowMenuItem {
+type CommonProps = {
   content: ReactNode;
-  onClick?: () => void;
-  children?: IOverflowMenuItem[];
   visible?: boolean | (() => boolean) | (() => Promise<boolean>);
   enabled?: boolean | (() => boolean) | (() => Promise<boolean>);
-}
+};
+
+type ActionItem = CommonProps & {
+  onClick: () => void;
+  children?: never;
+};
+
+type SubmenuItem = CommonProps & {
+  onClick?: () => void;
+  children: IOverflowMenuItem[];
+};
+
+type IOverflowMenuItem = ActionItem | SubmenuItem;
+
+export default IOverflowMenuItem;
