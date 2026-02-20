@@ -75,11 +75,57 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = ''
     visible: { opacity: 1, y: 0 },
   };
 
-  const renderMenuItem = (item: IOverflowMenuItem, index: number) => {
+  const evaluate = async (
+    val: boolean | (() => boolean) | (() => Promise<boolean>) | undefined,
+    defaultValue: boolean,
+  ): Promise<boolean> => {
+    if (val === undefined) return defaultValue;
+    if (typeof val === 'boolean') return val;
+    if (typeof val === 'function') {
+      const result = val();
+      if (result instanceof Promise) {
+        return await result;
+      }
+      return result;
+    }
+    return defaultValue;
+  };
+
+  const MenuRow: React.FC<{
+    item: IOverflowMenuItem;
+    index: number;
+    renderMenuItem: (item: IOverflowMenuItem, index: number) => React.ReactNode;
+  }> = ({ item, index, renderMenuItem }) => {
+    const [isVisible, setIsVisible] = React.useState<boolean | null>(null);
+    const [isEnabled, setIsEnabled] = React.useState<boolean | null>(null);
+
+    React.useEffect(() => {
+      let isMounted = true;
+      const checkVisibility = async () => {
+        const visible = await evaluate(item.visible, true);
+        if (isMounted) setIsVisible(visible);
+      };
+      const checkEnabled = async () => {
+        const enabled = await evaluate(item.enabled, true);
+        if (isMounted) setIsEnabled(enabled);
+      };
+
+      checkVisibility();
+      checkEnabled();
+
+      return () => {
+        isMounted = false;
+      };
+    }, [item.visible, item.enabled]);
+
+    if (isVisible === false) return null;
+
+    const disabled = isEnabled === false;
+
     if (item.children && item.children.length > 0) {
       return (
         <DropdownMenu.Sub key={index}>
-          <DropdownMenu.SubTrigger asChild className={styles.menuItem}>
+          <DropdownMenu.SubTrigger asChild className={styles.menuItem} disabled={disabled}>
             <motion.button variants={itemVariants} className={styles.subTrigger}>
               {item.content}
               <span className={styles.rightArrow}>▶</span>
@@ -101,6 +147,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = ''
         key={index}
         asChild
         className={styles.menuItem}
+        disabled={disabled}
         onSelect={() => {
           item.onClick?.();
         }}
@@ -108,6 +155,10 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = ''
         <motion.button variants={itemVariants}>{item.content}</motion.button>
       </DropdownMenu.Item>
     );
+  };
+
+  const renderMenuItem = (item: IOverflowMenuItem, index: number) => {
+    return <MenuRow key={index} item={item} index={index} renderMenuItem={renderMenuItem} />;
   };
 
   const content = (

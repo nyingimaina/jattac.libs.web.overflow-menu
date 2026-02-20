@@ -31,6 +31,27 @@ const App = () => {
             content: 'Delete',
             onClick: () => alert('Deleting!'),
         },
+        {
+            content: 'Admin Only',
+            visible: false,
+            onClick: () => alert('Admin Action!'),
+        },
+        {
+            content: 'Conditional Action',
+            visible: () => true,
+            enabled: () => false,
+            onClick: () => alert('Conditional!'),
+        },
+        {
+            content: 'Async Visible',
+            visible: () => new Promise((resolve) => setTimeout(() => resolve(true), 1000)),
+            onClick: () => alert('Async Visible!'),
+        },
+        {
+            content: 'Async Disabled',
+            enabled: () => new Promise((resolve) => setTimeout(() => resolve(false), 500)),
+            onClick: () => alert('Async Disabled!'),
+        },
     ];
 
     const tableData = Array.from({ length: 100 }, (_, i) => `Row ${i + 1}`);
