@@ -1,33 +1,12 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import { evaluate } from '../Utils/Evaluate';
+import { dotVariants, menuVariants, itemVariants } from './Animations';
 import styles from '../Styles/OverflowMenu.module.css';
 
 const DefaultIcon = () => {
-  const dotVariants: Variants = {
-    initial: { y: 0, scale: 1 },
-    hover: {
-      y: -4,
-      scale: 1.2,
-      transition: {
-        type: 'spring',
-        stiffness: 500,
-        damping: 20,
-      },
-    },
-    rest: {
-      y: 0,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 500,
-        damping: 20,
-      },
-    },
-  };
-
   return (
     <motion.div className={styles.dotsWrapper} initial="rest" whileHover="hover" animate="rest">
       {[0, 1, 2].map((i) => (
@@ -52,29 +31,6 @@ interface OverflowMenuProps {
 
 const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = '', portal = null }) => {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const menuVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        duration: 0.1,
-      },
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.2,
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   const MenuRow: React.FC<{
     item: IOverflowMenuItem;
