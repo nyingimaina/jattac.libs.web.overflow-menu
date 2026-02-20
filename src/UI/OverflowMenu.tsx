@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import DefaultIcon from './DefaultIcon';
 import MenuRow from './MenuRow';
+import { menuVariants } from './Animations';
 import styles from '../Styles/OverflowMenu.module.css';
 
 interface OverflowMenuProps {
@@ -17,15 +18,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = ''
   const [isOpen, setIsOpen] = React.useState(false);
 
   const renderMenuItem = (item: IOverflowMenuItem, index: number) => {
-    return (
-      <MenuRow
-        key={index}
-        item={item}
-        index={index}
-        portal={portal}
-        renderMenuItem={renderMenuItem}
-      />
-    );
+    return <MenuRow key={index} item={item} index={index} portal={portal} renderMenuItem={renderMenuItem} />;
   };
 
   const content = (
