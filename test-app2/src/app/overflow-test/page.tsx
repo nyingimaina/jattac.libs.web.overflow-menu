@@ -8,6 +8,26 @@ const OverflowTestPage = () => {
         {
             content: 'Edit',
             onClick: () => alert('Editing!'),
+            children: [
+                {
+                    content: 'Edit Name',
+                    onClick: () => alert('Editing Name!'),
+                },
+                {
+                    content: 'Edit Details',
+                    onClick: () => alert('Editing Details!'),
+                    children: [
+                        {
+                            content: 'General',
+                            onClick: () => alert('Editing General Details!'),
+                        },
+                        {
+                            content: 'Advanced',
+                            onClick: () => alert('Editing Advanced Details!'),
+                        },
+                    ],
+                },
+            ],
         },
         {
             content: 'Delete',

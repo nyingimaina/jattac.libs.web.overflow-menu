@@ -85,6 +85,55 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
         visible: { opacity: 1, y: 0 },
     };
 
+    const renderMenuItem = (item: IOverflowMenuItem, index: number) => {
+        if (item.children && item.children.length > 0) {
+            return (
+                <DropdownMenu.Sub key={index}>
+                    <DropdownMenu.SubTrigger asChild className={styles.menuItem}>
+                        <motion.button variants={itemVariants} className={styles.subTrigger}>
+                            {item.content}
+                            <span className={styles.rightArrow}>▶</span>
+                        </motion.button>
+                    </DropdownMenu.SubTrigger>
+                    <DropdownMenu.Portal container={portal}>
+                        <DropdownMenu.SubContent
+                            asChild
+                            className={styles.menu}
+                            sideOffset={2}
+                            alignOffset={-5}
+                        >
+                            <motion.div
+                                variants={menuVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                            >
+                                {item.children.map((child, childIndex) =>
+                                    renderMenuItem(child, childIndex)
+                                )}
+                            </motion.div>
+                        </DropdownMenu.SubContent>
+                    </DropdownMenu.Portal>
+                </DropdownMenu.Sub>
+            );
+        }
+
+        return (
+            <DropdownMenu.Item
+                key={index}
+                asChild
+                className={styles.menuItem}
+                onSelect={() => {
+                    item.onClick?.();
+                }}
+            >
+                <motion.button variants={itemVariants}>
+                    {item.content}
+                </motion.button>
+            </DropdownMenu.Item>
+        );
+    };
+
     const content = (
         <AnimatePresence>
             {isOpen && (
@@ -101,20 +150,7 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({
                             animate="visible"
                             exit="hidden"
                         >
-                            {items.map((item, index) => (
-                                <DropdownMenu.Item
-                                    key={index}
-                                    asChild
-                                    className={styles.menuItem}
-                                    onSelect={() => {
-                                        item.onClick?.();
-                                    }}
-                                >
-                                    <motion.button variants={itemVariants}>
-                                        {item.content}
-                                    </motion.button>
-                                </DropdownMenu.Item>
-                            ))}
+                            {items.map((item, index) => renderMenuItem(item, index))}
                         </motion.div>
                     </DropdownMenu.Content>
                 </DropdownMenu.Portal>

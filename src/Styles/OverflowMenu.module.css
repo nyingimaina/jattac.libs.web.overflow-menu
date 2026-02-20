@@ -108,6 +108,21 @@
   background: rgba(2, 75, 89, 0.1); /* --ofm-item-active-bg */
 }
 
+/* Submenu trigger specific styles */
+.subTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rightArrow {
+  margin-left: auto;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
 /* New styles for the default animated icon */
 .dotsWrapper {
   display: flex;
