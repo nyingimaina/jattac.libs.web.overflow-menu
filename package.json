@@ -1,7 +1,7 @@
 {
   "name": "jattac.libs.web.overflow-menu",
   "version": "0.0.30",
-  "description": "A customizable and lightweight React overflow menu component with a modern design.",
+  "description": "Enterprise-grade, accessible, and highly customizable React overflow menu component. Built on Radix UI and Framer Motion for premium UX and full WAI-ARIA compliance.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -16,11 +16,21 @@
       "require": "./dist/index.css"
     }
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nyingimaina/jattac.libs.web.overflow-menu.git"
   },
+  "bugs": {
+    "url": "https://github.com/nyingimaina/jattac.libs.web.overflow-menu/issues"
+  },
   "homepage": "https://github.com/nyingimaina/jattac.libs.web.overflow-menu#readme",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "files": [
     "dist",
     "docs"
@@ -29,15 +39,27 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "lint": "eslint \"./{src,app}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"./{src,app}/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "type-check": "tsc --noEmit",
     "size": "size-limit",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run type-check && npm run build"
   },
   "keywords": [
     "react",
     "typescript",
     "menu",
     "overflow-menu",
-    "component"
+    "dropdown",
+    "context-menu",
+    "accessible",
+    "radix-ui",
+    "framer-motion",
+    "ui-component",
+    "enterprise",
+    "nested-menu",
+    "submenu"
   ],
   "author": "Nyingi Maina",
   "license": "MIT",
