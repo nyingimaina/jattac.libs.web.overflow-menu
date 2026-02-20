@@ -2,6 +2,7 @@ import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
+import { evaluate } from '../Utils/Evaluate';
 import styles from '../Styles/OverflowMenu.module.css';
 
 const DefaultIcon = () => {
@@ -73,22 +74,6 @@ const OverflowMenu: React.FC<OverflowMenuProps> = ({ items, icon, className = ''
   const itemVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0 },
-  };
-
-  const evaluate = async (
-    val: boolean | (() => boolean) | (() => Promise<boolean>) | undefined,
-    defaultValue: boolean,
-  ): Promise<boolean> => {
-    if (val === undefined) return defaultValue;
-    if (typeof val === 'boolean') return val;
-    if (typeof val === 'function') {
-      const result = val();
-      if (result instanceof Promise) {
-        return await result;
-      }
-      return result;
-    }
-    return defaultValue;
   };
 
   const MenuRow: React.FC<{
