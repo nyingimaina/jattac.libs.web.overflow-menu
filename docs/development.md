@@ -21,12 +21,17 @@ To get started with local development, ensure you have Node.js and npm installed
 
 ### Internal Architecture
 
-The project is structured to maintain a clean separation between data, styles, and UI components:
-- `src/Data`: Contains TypeScript interfaces and types, such as `IOverflowMenuItem`.
-- `src/Styles`: Contains CSS Modules for component styling.
-- `src/UI`: Contains the core React components, including `OverflowMenu.tsx`.
-- `test-app/`: A standalone React environment for manual testing and component verification.
-- `test-app2/`: A Next.js (App Router) environment for verifying compatibility with modern frameworks.
+The project is structured to maintain a clean separation of concerns:
+- `src/Data`: Contains core types, including the `IOverflowMenuItem` discriminated union.
+- `src/Styles`: Contains CSS Modules for encapsulated styling.
+- `src/Utils`: Includes helper utilities, such as `Evaluate.ts` for handling sync/async properties.
+- `src/UI`: Contains modular components:
+  - `Animations.ts`: Centralized Framer Motion variants.
+  - `DefaultIcon.tsx`: The default animated trigger icon.
+  - `MenuRow.tsx`: Logic for individual menu rows and submenus.
+  - `OverflowMenu.tsx`: The root component and coordinator.
+- `test-app/`: A standard React environment for manual testing.
+- `test-app2/`: A Next.js (App Router) environment for cross-framework verification.
 
 ### Available Scripts
 

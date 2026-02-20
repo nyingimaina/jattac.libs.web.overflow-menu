@@ -5,9 +5,11 @@ The Jattac Overflow Menu offers a powerful set of features designed to simplify 
 ### Table of Contents
 1. [Full Accessibility](#full-accessibility)
 2. [Multi-Level Submenus](#multi-level-submenus)
-3. [Advanced Animations](#advanced-animations)
-4. [Modern Frosted-Glass Aesthetic](#modern-frosted-glass-aesthetic)
-5. [Flexible Trigger Icons](#flexible-trigger-icons)
+3. [Conditional Visibility and Enabled Toggling](#conditional-visibility-and-enabled-toggling)
+4. [Advanced Animations](#advanced-animations)
+5. [Atomic & Maintainable Architecture](#atomic-maintainable-architecture)
+6. [Modern Frosted-Glass Aesthetic](#modern-frosted-glass-aesthetic)
+7. [Flexible Trigger Icons](#flexible-trigger-icons)
 
 [Previous: Cookbook](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md) | [Next: API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md)
 
@@ -28,9 +30,22 @@ Organize complex sets of actions with ease using recursive submenus. The library
 
 For implementation details, refer to the [Multi-Level Child Menus recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#multi-level-child-menus).
 
+### Conditional Visibility and Enabled Toggling
+
+Dynamically control whether actions are visible or interactive. These properties support boolean values, synchronous functions, and asynchronous functions (Promises). This allows for complex logic, such as checking permissions from an API or verifying state before enabling an action.
+
+For implementation details, refer to the [Conditional Visibility recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#conditional-visibility).
+
 ### Advanced Animations
 
 Powered by Framer Motion, every interaction feels deliberate and responsive. The trigger features spring-based hover effects, and the menu items use staggered entry animations to guide the user's eye.
+
+### Atomic & Maintainable Architecture
+
+The library is designed for enterprise-grade maintainability. The core component has been refactored into atomic, single-responsibility modules, including:
+- **`Evaluate` Utility:** Centralized logic for boolean/sync/async property evaluation.
+- **Animation Hub:** Consolidated Framer Motion variants for consistency.
+- **Isolated UI Components:** Modularized `DefaultIcon` and `MenuRow` for easier testing and extension.
 
 ### Modern Frosted-Glass Aesthetic
 

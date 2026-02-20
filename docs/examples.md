@@ -7,7 +7,9 @@ The Jattac Overflow Menu is designed to be highly flexible. This cookbook provid
 2. [Custom Trigger Icon](#custom-trigger-icon)
 3. [Rich Content Items](#rich-content-items)
 4. [Multi-Level Child Menus](#multi-level-child-menus)
-5. [Using a Portal for Complex Layouts](#using-a-portal-for-complex-layouts)
+5. [Conditional Visibility](#conditional-visibility)
+6. [Enabled Toggling](#enabled-toggling)
+7. [Using a Portal for Complex Layouts](#using-a-portal-for-complex-layouts)
 
 [Previous: README](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/README.md) | [Next: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md)
 
@@ -112,6 +114,70 @@ const items: IOverflowMenuItem[] = [
 const MyComponent = () => (
   <OverflowMenu items={items} />
 );
+```
+
+### Conditional Visibility
+
+Control the visibility of menu items using booleans, synchronous functions, or asynchronous functions. This is ideal for role-based access control or state-dependent actions.
+
+```tsx
+import React from 'react';
+import OverflowMenu, { IOverflowMenuItem } from 'jattac.libs.web.overflow-menu';
+
+const items: IOverflowMenuItem[] = [
+  {
+    content: 'Admin Panel',
+    visible: false, // Statically hidden
+    onClick: () => {},
+  },
+  {
+    content: 'User Settings',
+    visible: () => localStorage.getItem('user') !== null, // Synchronous check
+    onClick: () => {},
+  },
+  {
+    content: 'Delete Project',
+    visible: async () => {
+      const response = await fetch('/api/check-permissions');
+      return response.ok; // Asynchronous check
+    },
+    onClick: () => {},
+  },
+];
+
+const MyComponent = () => <OverflowMenu items={items} />;
+```
+
+### Enabled Toggling
+
+Similar to visibility, you can disable items while keeping them visible. Disabled items are non-interactive and styled appropriately to indicate their state.
+
+```tsx
+import React from 'react';
+import OverflowMenu, { IOverflowMenuItem } from 'jattac.libs.web.overflow-menu';
+
+const items: IOverflowMenuItem[] = [
+  {
+    content: 'Quick Save',
+    enabled: true,
+    onClick: () => {},
+  },
+  {
+    content: 'Export Data',
+    enabled: () => isDataDirty, // Synchronous check
+    onClick: () => {},
+  },
+  {
+    content: 'Finalize Deployment',
+    enabled: async () => {
+      const status = await getBuildStatus();
+      return status === 'ready'; // Asynchronous check
+    },
+    onClick: () => {},
+  },
+];
+
+const MyComponent = () => <OverflowMenu items={items} />;
 ```
 
 ### Using a Portal for Complex Layouts

@@ -4,7 +4,7 @@ This document provides exhaustive technical specifications for the Jattac Overfl
 
 ### Table of Contents
 1. [OverflowMenu Component](#overflowmenu-component)
-2. [IOverflowMenuItem Interface](#ioverflowmenuitem-interface)
+2. [IOverflowMenuItem Type](#ioverflowmenuitem-type)
 
 [Previous: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md) | [Next: Configuration](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md)
 
@@ -21,19 +21,26 @@ The primary component for rendering the overflow menu.
 | `className` | `string` | No | `''` | A custom CSS class to apply to the trigger button for styling. |
 | `portal` | `HTMLElement` | No | `null` | A reference to a DOM element to render the menu content into using a React Portal. |
 
-### IOverflowMenuItem Interface
+### IOverflowMenuItem Type
 
-The interface defining the structure of each item in the `items` array.
+`IOverflowMenuItem` is a discriminated union that enforces correct property usage for different menu item roles.
 
 | Property | Type | Required | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| `content` | `React.ReactNode` | Yes | - | The visual content to be displayed for the menu item. |
-| `onClick` | `() => void` | No | - | A callback function to execute when the menu item is selected. |
-| `children` | `IOverflowMenuItem[]` | No | - | An optional array of child items to create a nested submenu. |
+| `content` | `React.ReactNode` | Yes | - | The visual content for the menu item. |
+| `onClick` | `() => void` | **See Note** | - | Callback executed when the item is selected. |
+| `children` | `IOverflowMenuItem[]` | **See Note** | - | Optional child items to create a nested submenu. |
+| `visible` | `boolean \| (() => boolean) \| (() => Promise<boolean>)` | No | `true` | Controls the visibility of the item. Supports booleans, sync, and async functions. |
+| `enabled` | `boolean \| (() => boolean) \| (() => Promise<boolean>)` | No | `true` | Controls whether the item is interactive. Supports booleans, sync, and async functions. |
 
-#### Notes on Type Behavior
-- If `children` is provided and contains at least one item, the menu item will render as a `SubmenuTrigger` rather than a standard `MenuItem`.
-- When an item has `children`, its `onClick` handler is ignored in favor of opening the submenu.
+#### Notes on Union Variants
+- **`ActionItem`:** Required `onClick`. Does not accept `children`.
+- **`SubmenuItem`:** Required `children` (minimum 1 item). `onClick` is optional and usually omitted.
+
+#### Notes on Visibility and Enabled State
+- If `visible` resolves to `false`, the item will not be rendered at all.
+- If `enabled` resolves to `false`, the item is rendered as disabled and `onClick` will not be triggered.
+- Async functions are evaluated once when the item is mounted or when their reference changes.
 
 ---
 
