@@ -42,13 +42,13 @@ const App = () => {
 
 ## Documentation Index
 
-1. [Cookbook: Practical Examples](./docs/examples.md) - **Start here** to learn through real-world scenarios.
-2. [Feature Showcase](./docs/features.md) - A high-level overview of available capabilities.
-3. [API Reference](./docs/api.md) - Detailed technical specifications for components and types.
-4. [Configuration Guide](./docs/configuration.md) - Customization, styling, and global settings.
-5. [Development Guide](./docs/development.md) - Instructions for contributors and local setup.
-6. [Migration Guide](./docs/breaking-changes.md) - Handling updates and breaking changes.
+1. [Cookbook: Practical Examples](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md) - **Start here** to learn through real-world scenarios.
+2. [Feature Showcase](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md) - A high-level overview of available capabilities.
+3. [API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md) - Detailed technical specifications for components and types.
+4. [Configuration Guide](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md) - Customization, styling, and global settings.
+5. [Development Guide](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/development.md) - Instructions for contributors and local setup.
+6. [Migration Guide](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/breaking-changes.md) - Handling updates and breaking changes.
 
 ---
 
-[Next: Cookbook](./docs/examples.md)
+[Next: Cookbook](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md)

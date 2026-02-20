@@ -7,7 +7,7 @@ The Jattac Overflow Menu is designed to be easily customized. This document outl
 2. [Advanced Styling with Data Attributes](#advanced-styling-with-data-attributes)
 3. [Portal Usage and Z-Index](#portal-usage-and-z-index)
 
-[Previous: API Reference](./api.md) | [Next: Development](./development.md)
+[Previous: API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md) | [Next: Development](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/development.md)
 
 ---
 
@@ -41,8 +41,8 @@ The `portal` prop is used to render the menu content into a specific DOM element
 - The menu is nested within a complex stacking context (e.g., a modal inside a table).
 - You need to explicitly manage the z-index of the menu content relative to other components in your application.
 
-For implementation details, refer to the [Using a Portal recipe](./examples.md#using-a-portal-for-complex-layouts).
+For implementation details, refer to the [Using a Portal recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#using-a-portal-for-complex-layouts).
 
 ---
 
-[Previous: API Reference](./api.md) | [Next: Development](./development.md)
+[Previous: API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md) | [Next: Development](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/development.md)

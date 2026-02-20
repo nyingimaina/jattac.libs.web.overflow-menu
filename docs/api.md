@@ -6,7 +6,7 @@ This document provides exhaustive technical specifications for the Jattac Overfl
 1. [OverflowMenu Component](#overflowmenu-component)
 2. [IOverflowMenuItem Interface](#ioverflowmenuitem-interface)
 
-[Previous: Features](./features.md) | [Next: Configuration](./configuration.md)
+[Previous: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md) | [Next: Configuration](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md)
 
 ---
 
@@ -37,4 +37,4 @@ The interface defining the structure of each item in the `items` array.
 
 ---
 
-[Previous: Features](./features.md) | [Next: Configuration](./configuration.md)
+[Previous: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md) | [Next: Configuration](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md)

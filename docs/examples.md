@@ -9,7 +9,7 @@ The Jattac Overflow Menu is designed to be highly flexible. This cookbook provid
 4. [Multi-Level Child Menus](#multi-level-child-menus)
 5. [Using a Portal for Complex Layouts](#using-a-portal-for-complex-layouts)
 
-[Previous: README](../README.md) | [Next: Features](./features.md)
+[Previous: README](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/README.md) | [Next: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md)
 
 ---
 
@@ -144,4 +144,4 @@ const App = () => {
 
 ---
 
-[Previous: README](../README.md) | [Next: Features](./features.md)
+[Previous: README](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/README.md) | [Next: Features](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/features.md)

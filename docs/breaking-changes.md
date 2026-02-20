@@ -5,7 +5,7 @@ This document provides information about major version changes and breaking chan
 ### Table of Contents
 1. [Version 0.0.30 (Upcoming)](#version-0-0-30-upcoming)
 
-[Previous: Development](./development.md) | [Next: README](../README.md)
+[Previous: Development](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/development.md) | [Next: README](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/README.md)
 
 ---
 
@@ -32,8 +32,8 @@ const items: IOverflowMenuItem[] = [
 ];
 ```
 
-For detailed implementation information, refer to the [Multi-Level Child Menus recipe](./examples.md#multi-level-child-menus) in the Cookbook.
+For detailed implementation information, refer to the [Multi-Level Child Menus recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#multi-level-child-menus) in the Cookbook.
 
 ---
 
-[Previous: Development](./development.md) | [Next: README](../README.md)
+[Previous: Development](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/development.md) | [Next: README](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/README.md)

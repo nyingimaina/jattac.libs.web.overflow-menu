@@ -9,7 +9,7 @@ The Jattac Overflow Menu offers a powerful set of features designed to simplify 
 4. [Modern Frosted-Glass Aesthetic](#modern-frosted-glass-aesthetic)
 5. [Flexible Trigger Icons](#flexible-trigger-icons)
 
-[Previous: Cookbook](./examples.md) | [Next: API Reference](./api.md)
+[Previous: Cookbook](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md) | [Next: API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md)
 
 ---
 
@@ -20,13 +20,13 @@ The component is built on top of Radix UI primitives, ensuring that it is fully 
 - Focus management to ensure proper tab order.
 - ARIA attributes that automatically communicate the state of the menu to assistive technologies.
 
-For implementation details, refer to the [Simple Action Menu recipe](./examples.md#simple-action-menu).
+For implementation details, refer to the [Simple Action Menu recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#simple-action-menu).
 
 ### Multi-Level Submenus
 
 Organize complex sets of actions with ease using recursive submenus. The library handles the logic for positioning, timing, and keyboard navigation for nested menus, ensuring a smooth experience regardless of depth.
 
-For implementation details, refer to the [Multi-Level Child Menus recipe](./examples.md#multi-level-child-menus).
+For implementation details, refer to the [Multi-Level Child Menus recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#multi-level-child-menus).
 
 ### Advanced Animations
 
@@ -40,8 +40,8 @@ Out of the box, the component features a "glassmorphism" design, including backd
 
 The default "three dots" icon is animated and interactive. However, the component supports any React node as a custom trigger, making it easy to adapt to your application's specific iconography.
 
-For implementation details, refer to the [Custom Trigger Icon recipe](./examples.md#custom-trigger-icon).
+For implementation details, refer to the [Custom Trigger Icon recipe](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md#custom-trigger-icon).
 
 ---
 
-[Previous: Cookbook](./examples.md) | [Next: API Reference](./api.md)
+[Previous: Cookbook](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/examples.md) | [Next: API Reference](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/api.md)

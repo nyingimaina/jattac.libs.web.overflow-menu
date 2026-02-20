@@ -8,7 +8,7 @@ Thank you for your interest in contributing to the Jattac Overflow Menu. This do
 3. [Available Scripts](#available-scripts)
 4. [Testing and Quality Assurance](#testing-and-quality-assurance)
 
-[Previous: Configuration](./configuration.md) | [Next: Breaking Changes](./breaking-changes.md)
+[Previous: Configuration](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md) | [Next: Breaking Changes](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/breaking-changes.md)
 
 ---
 
@@ -44,4 +44,4 @@ Before submitting a pull request, please ensure that:
 
 ---
 
-[Previous: Configuration](./configuration.md) | [Next: Breaking Changes](./breaking-changes.md)
+[Previous: Configuration](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/configuration.md) | [Next: Breaking Changes](https://github.com/nyingimaina/jattac.libs.web.overflow-menu/blob/develop/docs/breaking-changes.md)

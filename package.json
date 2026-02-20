@@ -16,8 +16,14 @@
       "require": "./dist/index.css"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyingimaina/jattac.libs.web.overflow-menu.git"
+  },
+  "homepage": "https://github.com/nyingimaina/jattac.libs.web.overflow-menu#readme",
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "scripts": {
     "build": "rollup -c",
