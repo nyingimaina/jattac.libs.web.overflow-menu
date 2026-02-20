@@ -1,6 +1,6 @@
 {
   "name": "jattac.libs.web.overflow-menu",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Enterprise-grade, accessible, and highly customizable React overflow menu component. Built on Radix UI and Framer Motion for premium UX and full WAI-ARIA compliance.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -64,9 +64,9 @@
   "author": "Nyingi Maina",
   "license": "MIT",
   "peerDependencies": {
+    "framer-motion": ">=11.0.0",
     "react": ">=18.2.0",
-    "react-dom": ">=18.2.0",
-    "framer-motion": ">=11.0.0"
+    "react-dom": ">=18.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
