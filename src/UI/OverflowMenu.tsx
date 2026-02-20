@@ -3,24 +3,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { motion, AnimatePresence } from 'framer-motion';
 import IOverflowMenuItem from '../Data/IOverflowMenuItem';
 import { evaluate } from '../Utils/Evaluate';
-import { dotVariants, menuVariants, itemVariants } from './Animations';
+import { menuVariants, itemVariants } from './Animations';
+import DefaultIcon from './DefaultIcon';
 import styles from '../Styles/OverflowMenu.module.css';
-
-const DefaultIcon = () => {
-  return (
-    <motion.div className={styles.dotsWrapper} initial="rest" whileHover="hover" animate="rest">
-      {[0, 1, 2].map((i) => (
-        <motion.span
-          key={i}
-          className={styles.dot}
-          variants={dotVariants}
-          custom={i}
-          transition={{ delay: i * 0.05 }}
-        />
-      ))}
-    </motion.div>
-  );
-};
 
 interface OverflowMenuProps {
   items: IOverflowMenuItem[];
